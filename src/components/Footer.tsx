@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="footer sm:footer-horizontal bg-[090A0D] text-neutral-content justify-between p-6.5">
 
             
-                <div>
+                <div className='flex'>
                     <Image src="/logo.png" alt="FitLog logo" width={28} height={28} />
                     FITLOG
                 </div>

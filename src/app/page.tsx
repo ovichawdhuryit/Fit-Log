@@ -10,11 +10,11 @@ import Library from "@/components/Library"
 export default function Home() {
   return (
     <div>
-    <Navbar></Navbar>
+    {/* <Navbar></Navbar> */}
     <Hero></Hero>
     <Library></Library>
     <WorkoutList></WorkoutList>
-    <Footer></Footer>
+    {/* <Footer></Footer> */}
     </div>
   );
 }
