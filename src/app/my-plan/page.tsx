@@ -1,15 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { usePlan } from '@/context/PlanContext';
-import { Clock, Flame, Star, Check, X } from 'lucide-react';
+import { Clock, Flame, Star, Check, X, ChevronDown } from 'lucide-react';
+
+type SortOption = 'duration' | 'calories' | 'rating';
 
 export default function MyPlanPage() {
     const { plan, saved, removeFromPlan, removeFromSaved, markAsDone } = usePlan();
     const [tab, setTab] = useState<'plan' | 'saved'>('plan');
+    const [sortBy, setSortBy] = useState<SortOption>('duration');
 
-    const list = tab === 'plan' ? plan : saved;
+    const rawList = tab === 'plan' ? plan : saved;
+
+    const list = useMemo(() => {
+        const sorted = [...rawList];
+        switch (sortBy) {
+            case 'duration':
+                return sorted.sort((a, b) => a.duration - b.duration);
+            case 'calories':
+                return sorted.sort((a, b) => a.caloriesBurned - b.caloriesBurned);
+            case 'rating':
+                return sorted.sort((a, b) => b.rating - a.rating); // highest rating first
+            default:
+                return sorted;
+        }
+    }, [rawList, sortBy]);
 
     const totalMinutes = plan.reduce((sum, w) => sum + w.duration, 0);
     const totalCalories = plan.reduce((sum, w) => sum + w.caloriesBurned, 0);
@@ -21,7 +38,6 @@ export default function MyPlanPage() {
                 Cap of five lifts for today. Finish them, then load more.
             </p>
 
-            {/* Metrics row */}
             <div className="grid grid-cols-3 gap-4 mt-6 bg-neutral rounded-2xl p-6">
                 <div>
                     <p className="text-sm text-neutral-content/60">Exercises</p>
@@ -37,20 +53,37 @@ export default function MyPlanPage() {
                 </div>
             </div>
 
-            {/* Tabs */}
-            <div className="tabs tabs-boxed w-fit mt-6 bg-neutral">
-                <button
-                    className={`tab ${tab === 'plan' ? 'tab-active' : ''}`}
-                    onClick={() => setTab('plan')}
-                >
-                    Today's Plan
-                </button>
-                <button
-                    className={`tab ${tab === 'saved' ? 'tab-active' : ''}`}
-                    onClick={() => setTab('saved')}
-                >
-                    Saved
-                </button>
+            {/* Tabs + Sort row */}
+            <div className="flex items-center justify-between mt-6">
+                <div className="tabs tabs-boxed w-fit bg-neutral">
+                    <button
+                        className={`tab ${tab === 'plan' ? 'tab-active' : ''}`}
+                        onClick={() => setTab('plan')}
+                    >
+                        Today's Plan
+                    </button>
+                    <button
+                        className={`tab ${tab === 'saved' ? 'tab-active' : ''}`}
+                        onClick={() => setTab('saved')}
+                    >
+                        Saved
+                    </button>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm">
+                    <span className="text-neutral-content/60">Sort By</span>
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-sm bg-neutral border-white/10 gap-1">
+                            {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
+                            <ChevronDown size={14} />
+                        </div>
+                        <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-10 w-40 p-2 shadow border border-white/10 mt-1">
+                            <li><button onClick={() => setSortBy('duration')}>Duration</button></li>
+                            <li><button onClick={() => setSortBy('calories')}>Calories</button></li>
+                            <li><button onClick={() => setSortBy('rating')}>Rating</button></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             {/* List / empty state */}

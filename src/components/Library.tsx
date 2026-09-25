@@ -2,7 +2,7 @@ import React from 'react';
 
 const library = () => {
     return (
-        <div className='my-4.5 mx-8 '>
+        <div className='my-4.5 mx-28  '>
             <p className='text-5xl font-bold text-white  mt-1.5'>
                 THE LIBRARY
             </p>
