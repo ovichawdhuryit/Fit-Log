@@ -10,16 +10,17 @@ const Hero = () => {
                 </p>
 
 
-                <p className='text-5xl mt-1.5'>
+                <p className='text-5xl font-bold text-white  mt-1.5'>
                     TRAIN WITH INTENT. LOG <br></br> EVERY SET.
                 </p>
 
-                <p className='mt-2'>
+                <p className='mt-2 text-white '>
                     FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br />
                     into today's plan, and watch the week's work add up.
                 </p>
 
-                <button className='border-1 mt-5 bg-[#C2F800] text-black rounded-2xl p-2'>
+                <button className='border-1 mt-5 bg-[#C2F800] text-black rounded-2xl 
+                btn p-2 btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl'>
                     BROWSE WORKOUTS
                 </button>
 
