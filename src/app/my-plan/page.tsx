@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { usePlan } from '@/context/PlanContext';
 import { Clock, Flame, Star, Check, X, ChevronDown } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 type SortOption = 'duration' | 'calories' | 'rating';
 
@@ -31,6 +32,20 @@ export default function MyPlanPage() {
     const totalMinutes = plan.reduce((sum, w) => sum + w.duration, 0);
     const totalCalories = plan.reduce((sum, w) => sum + w.caloriesBurned, 0);
 
+    const handleMarkDone = (id: number, name: string) => {
+        markAsDone(id);
+        toast.success(`${name} marked as done!`);
+    };
+
+    const handleRemove = (id: number, name: string) => {
+        if (tab === 'plan') {
+            removeFromPlan(id);
+        } else {
+            removeFromSaved(id);
+        }
+        toast(`${name} removed`, { icon: '🗑️' });
+    };
+
     return (
         <div className="max-w-6xl mx-auto p-6">
             <h1 className="text-3xl font-extrabold uppercase">My Plan</h1>
@@ -53,7 +68,6 @@ export default function MyPlanPage() {
                 </div>
             </div>
 
-            {/* Tabs + Sort row */}
             <div className="flex items-center justify-between mt-6">
                 <div className="tabs tabs-boxed w-fit bg-neutral">
                     <button
@@ -86,7 +100,6 @@ export default function MyPlanPage() {
                 </div>
             </div>
 
-            {/* List / empty state */}
             <div className="mt-4 border border-white/10 rounded-2xl min-h-[300px] flex items-center justify-center">
                 {list.length === 0 ? (
                     <div className="text-center py-16">
@@ -119,14 +132,15 @@ export default function MyPlanPage() {
                                         View Details
                                     </Link>
                                     {tab === 'plan' && (
-                                        <button onClick={() => markAsDone(workout.id)} className="btn btn-sm btn-ghost">
+                                        <button
+                                            onClick={() => handleMarkDone(workout.id, workout.name)}
+                                            className="btn btn-sm btn-ghost"
+                                        >
                                             <Check size={16} />
                                         </button>
                                     )}
                                     <button
-                                        onClick={() =>
-                                            tab === 'plan' ? removeFromPlan(workout.id) : removeFromSaved(workout.id)
-                                        }
+                                        onClick={() => handleRemove(workout.id, workout.name)}
                                         className="btn btn-sm btn-ghost"
                                     >
                                         <X size={16} />

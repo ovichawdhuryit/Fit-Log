@@ -3,19 +3,19 @@
 import React from 'react';
 import { usePlan, Workout } from '@/context/PlanContext';
 import { CalendarPlus, Bookmark } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const WorkoutActions = ({ workout }: { workout: Workout }) => {
     const { plan, addToPlan, addToSaved } = usePlan();
 
     const handleAddToPlan = () => {
         addToPlan(workout);
-        // Toast placeholder — see note below on adding a toast library
-        alert("Added to today's plan");
+        toast.success("Added to today's plan");
     };
 
     const handleSave = () => {
         addToSaved(workout);
-        alert('Saved for later');
+        toast.success('Saved for later');
     };
 
     const planFull = plan.length >= 5 && !plan.some((w) => w.id === workout.id);

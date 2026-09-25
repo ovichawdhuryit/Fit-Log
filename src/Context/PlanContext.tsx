@@ -73,9 +73,7 @@ export const PlanProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const markAsDone = (id: number) => {
-        setPlan((prev) =>
-            prev.map((w) => (w.id === id ? { ...w, done: true } : w))
-        );
+        setPlan((prev) => prev.filter((w) => w.id !== id));
     };
 
     return (

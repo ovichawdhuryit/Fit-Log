@@ -4,18 +4,16 @@ FitLog is a dark, no-nonsense gym companion. Browse a library of workouts, check
 
 ## Technologies Used
 
-- **Next.js (App Router)** — routing, server-side data fetching, and page structure
-- **TypeScript** — type-safe components and data models
-- **Tailwind CSS + DaisyUI** — styling, theming, and responsive layout
-- **React Context API** — global state for the workout plan and saved list
-- **localStorage** — persists your plan/saved data across page reloads
-- **lucide-react** — icon set used throughout the UI
-
+- **TypeScript** 
+- **Tailwind CSS + DaisyUI** 
+- **React Context API** 
+- **localStorage** 
+- **lucide-react**
 ## Key Features
 
 - **Workout Library** — all workouts pulled live from the API and displayed as a responsive grid, with each card showing an image, muscle-group tags, equipment, and quick stats (duration, calories, rating).
 - **Workout Detail Pages** — dynamic routes for every workout with a full breakdown: description, key specs, and step-by-step instructions.
-- **Today's Plan & Saved Lists** — add any workout to your daily plan or save it for later, straight from the detail page, with a live count reflected in the navbar.
+- **Today's Plan & Saved Lists** — add any workout to daily plan or save it for later, straight from the detail page, with a live count reflected in the navbar.
 - **My Plan Dashboard** — a dedicated page with live stats (exercises, minutes, calories), tabs for Plan vs. Saved, and the ability to mark workouts done or remove them.
-- **Sort & Filter** — reorder your plan or saved list by duration, calories, or rating.
+- **Sort & Filter** — reorder the plan or saved list by duration, calories, or rating.
 - **Fully Responsive** — built mobile-first and tested across mobile, tablet, and desktop breakpoints.
