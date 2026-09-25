@@ -1,3 +1,5 @@
+import WorkoutActions from '@/components/WorkoutActions';
+
 type Workout = {
     id: number;
     name: string;
@@ -36,9 +38,7 @@ export default async function WorkoutDetailPage({
 
     return (
         <div className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-8">
-            {/* Left: image */}
             <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                {/* Use next/image here once domain is confirmed working */}
                 <img
                     src={workout.image}
                     alt={workout.name}
@@ -46,17 +46,13 @@ export default async function WorkoutDetailPage({
                 />
             </div>
 
-            {/* Right: details */}
             <div>
                 <h1 className="text-3xl font-extrabold uppercase">{workout.name}</h1>
                 <p className="mt-2 text-neutral-content/70">{workout.description}</p>
 
                 <div className="flex gap-2 mt-4">
                     {workout.muscleGroups.map((group) => (
-                        <span
-                            key={group}
-                            className="badge bg-[#C2F800] text-black font-semibold"
-                        >
+                        <span key={group} className="badge bg-[#C2F800] text-black font-semibold">
                             {group.toUpperCase()}
                         </span>
                     ))}
@@ -92,12 +88,7 @@ export default async function WorkoutDetailPage({
                     ))}
                 </ol>
 
-                <div className="flex gap-3 mt-6">
-                    <button className="btn bg-[#C2F800] text-black">
-                        Add to today's plan
-                    </button>
-                    <button className="btn btn-outline">Save for later</button>
-                </div>
+                <WorkoutActions workout={workout} />
             </div>
         </div>
     );
