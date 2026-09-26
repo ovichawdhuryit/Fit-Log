@@ -17,3 +17,6 @@ FitLog is a dark, no-nonsense gym companion. Browse a library of workouts, check
 - **My Plan Dashboard** — a dedicated page with live stats (exercises, minutes, calories), tabs for Plan vs. Saved, and the ability to mark workouts done or remove them.
 - **Sort & Filter** — reorder the plan or saved list by duration, calories, or rating.
 - **Fully Responsive** — built mobile-first and tested across mobile, tablet, and desktop breakpoints.
+
+## Website URL
+- https://fit-log-ruddy-two.vercel.app/ 
